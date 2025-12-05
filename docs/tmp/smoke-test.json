@@ -1,0 +1,113 @@
+{
+  "saj_version": 1,
+  "jac": {
+    "auth": {
+      "alg": "Ed25519",
+      "kid": "rfc8032-test-key-1",
+      "sig": "S1IUzxjPDEt201V0sZN5ko-8vSeNzKxiTCpje30WflFWYaPhQM2Et1BDl9SdvAKPw-BFqXDM_fe-ov8QWVcBBw"
+    },
+    "dialogue": [
+      { "command": "uci", "from": "mp", "id": "s1", "type": "send" },
+      {
+        "expectation": {
+          "mode": "single_line",
+          "termination": { "type": "line_prefix", "value": "uciok" },
+          "timeout_sec": 5
+        },
+        "from": "sfe",
+        "id": "e1",
+        "type": "expect"
+      },
+      { "command": "isready", "from": "mp", "id": "s2", "type": "send" },
+      {
+        "expectation": {
+          "mode": "single_line",
+          "termination": { "type": "exact", "value": "readyok" },
+          "timeout_sec": 5
+        },
+        "from": "sfe",
+        "id": "e2",
+        "type": "expect"
+      },
+      { "command": "ucinewgame", "from": "mp", "id": "s3", "type": "send" },
+      {
+        "command": "position fen rnbqkbnr/pppppppp/8/8/8/8/PPPPPPPP/RNBQKBNR w KQkq - 0 1",
+        "from": "mp",
+        "id": "s4",
+        "type": "send"
+      },
+      { "command": "go depth 5", "from": "mp", "id": "s5", "type": "send" },
+      {
+        "expectation": {
+          "mode": "single_line",
+          "termination": { "type": "line_prefix", "value": "bestmove" },
+          "timeout_sec": 120
+        },
+        "from": "sfe",
+        "id": "e3",
+        "type": "expect"
+      }
+    ],
+    "uds_version": 1
+  },
+  "dialogue_log": [
+    {
+      "id": "s1",
+      "from": "mp",
+      "timestamp_utc": "2025-12-04T23:42:41.225314229Z",
+      "message": "uci"
+    },
+    {
+      "id": "e1",
+      "from": "sfe",
+      "timestamp_utc": "2025-12-04T23:42:41.834217608Z",
+      "message": "uciok"
+    },
+    {
+      "id": "s2",
+      "from": "mp",
+      "timestamp_utc": "2025-12-04T23:42:41.834252749Z",
+      "message": "isready"
+    },
+    {
+      "id": "e2",
+      "from": "sfe",
+      "timestamp_utc": "2025-12-04T23:42:41.834475421Z",
+      "message": "readyok"
+    },
+    {
+      "id": "s3",
+      "from": "mp",
+      "timestamp_utc": "2025-12-04T23:42:41.834497108Z",
+      "message": "ucinewgame"
+    },
+    {
+      "id": "s4",
+      "from": "mp",
+      "timestamp_utc": "2025-12-04T23:42:41.834509132Z",
+      "message": "position fen rnbqkbnr/pppppppp/8/8/8/8/PPPPPPPP/RNBQKBNR w KQkq - 0 1"
+    },
+    {
+      "id": "s5",
+      "from": "mp",
+      "timestamp_utc": "2025-12-04T23:42:41.834520404Z",
+      "message": "go depth 5"
+    },
+    {
+      "id": "e3",
+      "from": "sfe",
+      "timestamp_utc": "2025-12-04T23:42:41.842673337Z",
+      "message": "bestmove e2e4 ponder d7d6"
+    }
+  ],
+  "timing": {
+    "analysis_started_utc": "2025-12-04T23:42:41.224439895Z",
+    "analysis_duration_ms": 626
+  },
+  "engine": {
+    "binary_path": "/home/robert/repos/StockfishLongRunner/third_party/stockfish/src/stockfish",
+    "sha256": "865283ec23890212f02622d0d97c6e16713c399bd472f4c8f637006cd6196c27",
+    "arch": "linux/amd64",
+    "version_string": "Stockfish 17.1"
+  }
+}
